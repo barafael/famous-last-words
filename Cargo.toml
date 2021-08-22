@@ -2,7 +2,7 @@
 name = "famous-last-words"
 authors = ["Rafael Bachmann <rafael.bachmann.93@gmail.com"]
 description = "Error codes inspired by AIs, robots and other entities from books and movies"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2018"
 license-file = "LICENSE"
 repository = "https://github.com/barafael/famous-last-words"
