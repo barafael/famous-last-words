@@ -1,9 +1,14 @@
 use thiserror::Error;
 
+pub type Error = Hal9000Error;
+
 /// Error codes from "2001: A Space Odyssey", by AI HAL-9000.
+/// `Hal9000Error` instead of `Error` so that cbindgen can pick it up.
+/// Exported also as hal9000::Error.
+/// This is just an unfortunate limitation of cbindgen - it doesn't understand the Rust module system.
 #[derive(Debug, Error)]
 #[repr(C)]
-pub enum Error {
+pub enum Hal9000Error {
     /// We are all, by any practical definition of the words, foolproof and incapable of error.
     #[error(
         "We are all, by any practical definition of the words, foolproof and incapable of error"

@@ -1,3 +1,4 @@
+use hal9000::Hal9000Error;
 use thiserror::Error;
 
 pub mod hal9000;
@@ -6,7 +7,7 @@ pub mod hal9000;
 #[repr(C)]
 pub enum Error {
     #[error("HAL 9000 error: {0:?}")]
-    Hal9000(#[from] hal9000::Error),
+    Hal9000(#[from] Hal9000Error),
 }
 
 #[no_mangle]
@@ -16,11 +17,12 @@ pub extern "C" fn print_famous_last_word(word: Error) {
 
 #[cfg(test)]
 mod tests {
+    use crate::hal9000::Hal9000Error;
+
     use super::Error;
-    use super::hal9000;
 
     #[test]
     fn dave() {
-        let _error = Error::Hal9000(hal9000::Error::ImAfraidICantDoThat);
+        let _error = Error::Hal9000(Hal9000Error::ImAfraidICantDoThat);
     }
 }
