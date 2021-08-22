@@ -83,11 +83,6 @@ pub enum Error {
     EnthusiasmAndConfidenceInTheMission,
 }
 
-#[no_mangle]
-pub extern "C" fn print_famous_last_word(word: Error) {
-    println!("{:?}", word);
-}
-
 #[cfg(test)]
 mod tests {
     use super::Error;
