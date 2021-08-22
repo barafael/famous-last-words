@@ -2,7 +2,7 @@ use thiserror::Error;
 
 /// Error codes from "2001: A Space Odyssey", by AI HAL-9000.
 #[derive(Debug, Error)]
-#[repr(usize)]
+#[repr(C)]
 pub enum Error {
     /// We are all, by any practical definition of the words, foolproof and incapable of error.
     #[error(

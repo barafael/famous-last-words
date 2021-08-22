@@ -3,7 +3,7 @@ use thiserror::Error;
 pub mod hal9000;
 
 #[derive(Debug, Error)]
-#[repr(usize)]
+#[repr(C)]
 pub enum Error {
     #[error("HAL 9000 error: {0:?}")]
     Hal9000(#[from] hal9000::Error),
