@@ -1,0 +1,8 @@
+[package]
+name = "famous-last-words"
+authors = ["Rafael Bachmann <rafael.bachmann.93@gmail.com"]
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+thiserror = "1.0.26"
