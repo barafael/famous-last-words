@@ -1,13 +1,18 @@
 use hal9000::Hal9000Error;
 use thiserror::Error;
+use universal_ac::UniversalAcError;
 
 pub mod hal9000;
+pub mod universal_ac;
 
 #[derive(Debug, Error)]
 #[repr(C)]
 pub enum Error {
     #[error("HAL 9000 error: {0:?}")]
     Hal9000(#[from] Hal9000Error),
+
+    #[error("Universal AC error: {0:?}")]
+    UniversalAc(#[from] UniversalAcError),
 }
 
 #[no_mangle]
