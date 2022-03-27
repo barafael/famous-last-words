@@ -3,9 +3,15 @@ name = "famous-last-words"
 authors = ["Rafael Bachmann <rafael.bachmann.93@gmail.com"]
 description = "Error codes inspired by AIs, robots and other entities from books and movies"
 version = "0.1.1"
-edition = "2018"
+edition = "2021"
 license-file = "LICENSE"
 repository = "https://github.com/barafael/famous-last-words"
 
 [dependencies]
-thiserror = "1.0.26"
+enum_index = "0.2.0"
+enum_index_derive = "0.2.0"
+variant_count = "1.1.0"
+# js feature for WASM compatibility.
+getrandom = { version = "0.2.5", features = ["js"] }
+rand = "0.8.5"
+thiserror = "1.0.30"
