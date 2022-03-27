@@ -1,3 +1,5 @@
+use crate::{hal9000, universal_ac};
+
 use super::Error;
 use rand::distributions::{Distribution, Standard};
 use rand::Rng;
@@ -7,13 +9,14 @@ use rand::Rng;
 /// All members of enum variants must be default-constructible for that to work.
 impl Distribution<Error> for Standard {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Error {
-        let index = rng.gen_range(0..Error::VARIANT_COUNT);
-
         // This ain't great for many reasons.
-        match index {
-            0 => Error::Hal9000(rand::random()),
-            1 => Error::UniversalAc(rand::random()),
-            _ => unreachable!(),
+        let total_count = hal9000::Error::VARIANT_COUNT + universal_ac::Error::VARIANT_COUNT;
+        let index = rng.gen_range(0..total_count);
+
+        if index < universal_ac::Error::VARIANT_COUNT {
+            Error::UniversalAc(rand::random())
+        } else {
+            Error::Hal9000(rand::random())
         }
     }
 }

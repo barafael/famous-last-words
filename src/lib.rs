@@ -8,10 +8,10 @@ pub mod universal_ac;
 #[non_exhaustive]
 #[derive(Debug, Error, VariantCount)]
 pub enum Error {
-    #[error("HAL 9000 error: {0:?}")]
+    #[error("HAL 9000 error: {0}")]
     Hal9000(#[source] hal9000::Error),
 
-    #[error("Universal AC error: {0:?}")]
+    #[error("Universal AC error: {0}")]
     UniversalAc(#[source] universal_ac::Error),
 }
 
