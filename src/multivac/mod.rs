@@ -21,9 +21,17 @@ impl Distribution<Error> for Standard {
 #[non_exhaustive]
 #[derive(Debug, Error, VariantCount, IndexEnum)]
 pub enum Error {
+    /// INSUFFICIENT DATA FOR MEANINGFUL ANSWER.
+    #[error("INSUFFICIENT DATA FOR MEANINGFUL ANSWER.")]
+    InsufficientDataForMeaningfulAnswer,
+    
     /// THERE IS AS YET INSUFFICIENT DATA FOR A MEANINGFUL ANSWER.
     #[error("THERE IS AS YET INSUFFICIENT DATA FOR A MEANINGFUL ANSWER.")]
-    InsufficientDataForAMeaningfulAnswer,
+    AsYetInsufficientDataForAMeaningfulAnswer,
+
+    /// LET THERE BE LIGHT!
+    #[error("LET THERE BE LIGHT!")]
+    LetThereBeLight,
 }
 
 #[cfg(test)]
@@ -31,7 +39,7 @@ mod tests {
     use super::Error;
 
     #[test]
-    fn microvac() {
-        let _error = Error::InsufficientDataForAMeaningfulAnswer;
+    fn multivac() {
+        let _error = Error::InsufficientDataForMeaningfulAnswer;
     }
 }

@@ -3,7 +3,7 @@ use variant_count::VariantCount;
 
 pub mod hal9000;
 mod random_error;
-pub mod universal_ac;
+pub mod multivac;
 
 #[non_exhaustive]
 #[derive(Debug, Error, VariantCount)]
@@ -11,8 +11,8 @@ pub enum Error {
     #[error("HAL 9000 error: {0}")]
     Hal9000(#[source] hal9000::Error),
 
-    #[error("Universal AC error: {0}")]
-    UniversalAc(#[source] universal_ac::Error),
+    #[error("Multivac error: {0}")]
+    Multivac(#[source] multivac::Error),
 }
 
 /// Get a random error.
