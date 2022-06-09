@@ -1,25 +1,18 @@
-use enum_index::IndexEnum;
-use enum_index_derive::IndexEnum;
 use rand::distributions::{Distribution, Standard};
+use rand::prelude::IteratorRandom;
 use rand::Rng;
+use strum::EnumIter;
+use strum::IntoEnumIterator;
 use thiserror::Error;
-use variant_count::VariantCount;
 
-/// Implement a standard distribution for our error code enum.
-/// With this trait, `rand::random()` can be used to get a random enum variant.
-/// All members of enum variants must be default-constructible for that to work.
 impl Distribution<Error> for Standard {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Error {
-        let index = rng.gen_range(0..Error::VARIANT_COUNT);
-
-        // unwrap here is OK by construction, given that the VARIANT_COUNT is derived correctly.
-        Error::index_enum(index).unwrap()
+        Error::iter().choose(rng).unwrap()
     }
 }
 
 /// Error codes from "2001: A Space Odyssey", by AI HAL-9000.
-#[non_exhaustive]
-#[derive(Debug, Error, VariantCount, IndexEnum)]
+#[derive(Debug, Error, EnumIter)]
 pub enum Error {
     /// We are all, by any practical definition of the words, foolproof and incapable of error.
     #[error(

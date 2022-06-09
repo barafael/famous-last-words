@@ -1,30 +1,23 @@
-use enum_index::IndexEnum;
-use enum_index_derive::IndexEnum;
 use rand::distributions::{Distribution, Standard};
+use rand::prelude::IteratorRandom;
 use rand::Rng;
+use strum::EnumIter;
+use strum::IntoEnumIterator;
 use thiserror::Error;
-use variant_count::VariantCount;
 
-/// Implement a standard distribution for our error code enum.
-/// With this trait, `rand::random()` can be used to get a random enum variant.
-/// All members of enum variants must be default-constructible for that to work.
 impl Distribution<Error> for Standard {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Error {
-        let index = rng.gen_range(0..Error::VARIANT_COUNT);
-
-        // unwrap here is OK by construction, given that the VARIANT_COUNT is derived correctly.
-        Error::index_enum(index).unwrap()
+        Error::iter().choose(rng).unwrap()
     }
 }
 
-/// Error code from "The Last Question", 1956 short story by Isaac Asimov.
-#[non_exhaustive]
-#[derive(Debug, Error, VariantCount, IndexEnum)]
+/// Error codes from "The Last Question", 1956 short story by Isaac Asimov.
+#[derive(Debug, Error, EnumIter)]
 pub enum Error {
     /// INSUFFICIENT DATA FOR MEANINGFUL ANSWER.
     #[error("INSUFFICIENT DATA FOR MEANINGFUL ANSWER.")]
     InsufficientDataForMeaningfulAnswer,
-    
+
     /// THERE IS AS YET INSUFFICIENT DATA FOR A MEANINGFUL ANSWER.
     #[error("THERE IS AS YET INSUFFICIENT DATA FOR A MEANINGFUL ANSWER.")]
     AsYetInsufficientDataForAMeaningfulAnswer,

@@ -1,12 +1,9 @@
 use thiserror::Error;
-use variant_count::VariantCount;
 
 pub mod hal9000;
-mod random_error;
 pub mod multivac;
 
-#[non_exhaustive]
-#[derive(Debug, Error, VariantCount)]
+#[derive(Debug, Error)]
 pub enum Error {
     #[error("HAL 9000 error: {0}")]
     Hal9000(#[source] hal9000::Error),
@@ -17,7 +14,11 @@ pub enum Error {
 
 /// Get a random error.
 pub fn get_random_error() -> Error {
-    rand::random()
+    if rand::random() {
+        Error::Hal9000(rand::random())
+    } else {
+        Error::Multivac(rand::random())
+    }
 }
 
 #[cfg(test)]

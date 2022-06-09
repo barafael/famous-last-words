@@ -8,10 +8,8 @@ license-file = "LICENSE"
 repository = "https://github.com/barafael/famous-last-words"
 
 [dependencies]
-enum_index = "0.2.0"
-enum_index_derive = "0.2.0"
 # js feature for WASM compatibility.
 getrandom = { version = "0.2.6", features = ["js"] }
 rand = "0.8.5"
+strum = { version = "0.24.0", features = ["derive"] }
 thiserror = "1.0.31"
-variant_count = "1.1.0"
