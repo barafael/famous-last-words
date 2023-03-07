@@ -3,6 +3,7 @@ use thiserror::Error;
 pub mod hal9000;
 pub mod multivac;
 
+#[repr(C)]
 #[derive(Debug, Error)]
 pub enum Error {
     #[error("HAL 9000 error: {0}")]
@@ -12,13 +13,24 @@ pub enum Error {
     Multivac(#[source] multivac::Error),
 }
 
+#[no_mangle]
 /// Get a random error.
-pub fn get_random_error() -> Error {
+pub extern "C" fn get_random_error() -> Error {
     if rand::random() {
         Error::Hal9000(rand::random())
     } else {
         Error::Multivac(rand::random())
     }
+}
+
+#[no_mangle]
+pub extern "C" fn pub_hal9000() -> hal9000::Error {
+    hal9000::Error::BishopTakesKnightsPawn
+}
+
+#[no_mangle]
+pub extern "C" fn pub_multivac() -> multivac::Error {
+    multivac::Error::AsYetInsufficientDataForAMeaningfulAnswer
 }
 
 #[cfg(test)]

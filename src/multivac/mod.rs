@@ -12,6 +12,7 @@ impl Distribution<Error> for Standard {
 }
 
 /// Error codes from "The Last Question", 1956 short story by Isaac Asimov.
+#[repr(C)]
 #[derive(Debug, Error, EnumIter)]
 pub enum Error {
     /// INSUFFICIENT DATA FOR MEANINGFUL ANSWER.

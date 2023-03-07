@@ -12,6 +12,7 @@ impl Distribution<Error> for Standard {
 }
 
 /// Error codes from "2001: A Space Odyssey", by AI HAL-9000.
+#[repr(C)]
 #[derive(Debug, Error, EnumIter)]
 pub enum Error {
     /// We are all, by any practical definition of the words, foolproof and incapable of error.

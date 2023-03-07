@@ -5,8 +5,7 @@
 # for detailed documentation of every option here.
 
 
-
-language = "C++"
+language = "C"
 
 
 ############## Options for Wrapping the Contents of the Header #################
@@ -22,10 +21,8 @@ namespaces = []
 using_namespaces = []
 sys_includes = []
 includes = []
-no_includes = false
+no_includes = true
 after_includes = ""
-
-
 
 
 ############################ Code Style Options ################################
@@ -36,23 +33,19 @@ tab_width = 2
 documentation = true
 documentation_style = "auto"
 documentation_length = "full"
-line_endings = "LF" # also "CR", "CRLF", "Native"
-
-
+line_endings = "LF"           # also "CR", "CRLF", "Native"
 
 
 ############################# Codegen Options ##################################
 
 style = "both"
-sort_by = "Name" # default for `fn.sort_by` and `const.sort_by`
+sort_by = "Name"       # default for `fn.sort_by` and `const.sort_by`
 usize_is_size_t = true
-
 
 
 [defines]
 # "target_os = freebsd" = "DEFINE_FREEBSD"
 # "feature = serde" = "DEFINE_SERDE"
-
 
 
 [export]
@@ -63,9 +56,7 @@ item_types = []
 renaming_overrides_prefixing = false
 
 
-
 [export.rename]
-
 
 
 [export.body]
@@ -84,8 +75,6 @@ args = "auto"
 sort_by = "Name"
 
 
-
-
 [struct]
 rename_fields = "None"
 # must_use = "MUST_USE_STRUCT"
@@ -96,8 +85,6 @@ derive_lt = false
 derive_lte = false
 derive_gt = false
 derive_gte = false
-
-
 
 
 [enum]
@@ -115,22 +102,14 @@ enum_class = true
 private_default_tagged_enum_constructor = false
 
 
-
-
 [const]
 allow_static_const = true
 allow_constexpr = false
 sort_by = "Name"
 
 
-
-
 [macro_expansion]
 bitflags = false
-
-
-
-
 
 
 ############## Options for How Your Rust library Should Be Parsed ##############
@@ -141,7 +120,6 @@ parse_deps = false
 exclude = []
 clean = false
 extra_bindings = []
-
 
 
 [parse.expand]
