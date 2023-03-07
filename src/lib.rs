@@ -1,7 +1,19 @@
+use rand::{distributions::Standard, prelude::Distribution, Rng};
 use thiserror::Error;
 
 pub mod hal9000;
 pub mod multivac;
+pub mod terminator_genisys;
+
+impl Distribution<Error> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Error {
+        match rng.gen::<f64>() {
+            n if n < 1.0 / 3.0 => Error::Hal9000(rand::random()),
+            n if n < 2.0 / 3.0 => Error::Multivac(rand::random()),
+            _n => Error::TerminatorGenisys(rand::random()),
+        }
+    }
+}
 
 #[repr(C)]
 #[derive(Debug, Error)]
@@ -11,16 +23,15 @@ pub enum Error {
 
     #[error("Multivac error: {0}")]
     Multivac(#[source] multivac::Error),
+
+    #[error("Terminator Genisys error: {0}")]
+    TerminatorGenisys(#[source] terminator_genisys::Error),
 }
 
 #[no_mangle]
 /// Get a random error.
 pub extern "C" fn get_random_error() -> Error {
-    if rand::random() {
-        Error::Hal9000(rand::random())
-    } else {
-        Error::Multivac(rand::random())
-    }
+    rand::random()
 }
 
 #[no_mangle]
